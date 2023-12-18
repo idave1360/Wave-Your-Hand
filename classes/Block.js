@@ -225,15 +225,15 @@ class Block extends BlockCore {
     }
   
     move() {
-      if (keyIsDown(RIGHT_ARROW)) {
+      if (keyIsDown(68)) {
         Matter.Body.applyForce(this.body, this.body.position, {x: 0.04, y: 0});
-      } else if (keyIsDown(LEFT_ARROW)) {
+      } else if (keyIsDown(65)) {
         Matter.Body.applyForce(this.body, this.body.position, {x: -0.04, y: 0});
       }
     }
 
     isMoving() {
-      if (keyIsDown(RIGHT_ARROW) || keyIsDown(LEFT_ARROW)) {
+      if (keyIsDown(68) || keyIsDown(65)) {
         return true;
       }
     }

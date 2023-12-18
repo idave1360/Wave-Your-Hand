@@ -80,20 +80,20 @@ class Hand {
     }
   }
 
-  show() {
-    let pos = this.body.position;
-    let angle = this.body.angle;
+  // show() {
+  //   let pos = this.body.position;
+  //   let angle = this.body.angle;
 
-    push();
-    translate(pos.x, pos.y);
-    rotate(angle);
-    rectMode(CENTER);
-    strokeWeight(1);
-    stroke(0);
-    fill(255, 255, 255);
-    ellipse(0, 0, this.r * 2);
-    pop();
-  }
+  //   push();
+  //   translate(pos.x, pos.y);
+  //   rotate(angle);
+  //   rectMode(CENTER);
+  //   strokeWeight(1);
+  //   stroke(0);
+  //   fill(255, 255, 255);
+  //   ellipse(0, 0, this.r * 2);
+  //   pop();
+  // }
 
   ballshow() {
     let pos = this.body.position;
@@ -105,8 +105,21 @@ class Hand {
     rotate(angle);
     imageMode(CENTER);
     image(ball, 0, 0, this.r * 2, this.r * 2);
-    ellipse(0, 0, this.r * 2);
+    // ellipse(0, 0, this.r * 2);
+    pop();
+  }
+
+  puppyshow() {
+    let pos = this.body.position;
+
+    calculateAngle();
+
+    push();
+    translate(pos.x, pos.y);
+    rotate(angle);
+    imageMode(CENTER);
+    image(stage0_1, 0, 0, this.r * 2, this.r * 2);
+    // ellipse(0, 0, this.r * 2);
     pop();
   }
 }
-

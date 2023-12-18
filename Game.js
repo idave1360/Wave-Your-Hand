@@ -4,6 +4,8 @@ class Game {
       this.spacecount = 0;
       this.leftsnack = false;
       this.rightsnack = false;
+      this.sizecheck = false;
+      this.count = 0;
       this.c0 = true;
       this.c1 = true;
       this.c2 = true;
@@ -53,6 +55,7 @@ class Game {
     nextstage() {
         World.clear(world);
         elements = [];
+        this.count = 0;
         this.stage += 1;
     }
     
@@ -72,7 +75,7 @@ class Game {
             );
 
             elements.push(new BlockCore(world,
-                {x: width/2, y: 700, w: width, h: 100, color: (0, 0, 0, 0)},
+                {x: width/2, y: 700, w: width, h: 300, color: (0, 0, 0, 0)},
                {isStatic: true, label: "ground", density: 0.004, restitution: 0.5, friction: 0.1, frictionAir: 0.0})
             );
 
@@ -92,11 +95,13 @@ class Game {
         this.c0 = false;
         // scrollEndless(puppy.body.position);
 
+        // sound0.play();
+
         push();
         translate(width + off.x, off.y);
         scale(-1, 1);
         image(cam, 0, 0, width, height);
-          pop();
+        pop();
         image(stage0backgroundimage, 0, 0, width, height);
 
         switch (this.spacecount) {
@@ -112,11 +117,11 @@ class Game {
                 break;
 
             case 1:
-                if (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) {
+                if (keyIsDown(68) && keyIsDown(65)) {
                     image(bothActive, 50, 50, 176, 83);
-                } else if (keyIsDown(RIGHT_ARROW) && !keyIsDown(LEFT_ARROW)) {
+                } else if (keyIsDown(68) && !keyIsDown(65)) {
                     image(rightActive, 50, 50, 176, 83);
-                } else if (!keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) {
+                } else if (!keyIsDown(68) && keyIsDown(65)) {
                     image(leftActive, 50, 50, 176, 83);
                 } else {
                     image(bothInActive, 50, 50, 176, 83);
@@ -124,14 +129,14 @@ class Game {
 
                 if (!this.leftsnack) {
                     imageMode(CENTER);
-                    image(meat_3, 100, 600, 100, 100);
+                    image(meat_3, 100, 500, 100, 100);
                     imageMode(CORNER);
 
                 }
 
                 if (!this.rightsnack) {
                     imageMode(CENTER);
-                    image(meat_3, width - 100, 600, 100, 100);
+                    image(meat_3, width - 100, 500, 100, 100);
                     imageMode(CORNER);
                 }
 
@@ -175,13 +180,20 @@ class Game {
                 textFont(font);
                 textSize(40);
                 textAlign(CENTER, CENTER);
-                text("술떡이가 장난감을 가지고 왔다!", width/2, height - 100);
-                text("손바닥을 펼쳐서 장난감을 보여주자", width/2, height - 50);
-    
+                if (!this.sizecheck) {
+                    text("술떡이가 장난감을 가지고 왔다! 손바닥을 펼쳐서 장난감을 보여주자", width/2, height - 100);
+                    text("스페이스 바를 눌러 계속", width/2, height - 50);
+                } else {
+                    text("손 모양에 손 크기를 맞춰주세요", width/2, height - 100);
+                    text("손을 넓게 펴거나 화면에 가까이 하면 공이 커집니다", width/2, height - 50);
+                }
 
-                console.log(hand.body.circleRadius);
-                if (hand.body.circleRadius > 180) {
-                    this.spacecount += 1;
+                if (this.sizecheck){
+                // console.log(hand.body.circleRadius);
+                    if (hand.body.circleRadius > 180) {
+                        this.spacecount += 1;
+                        this.sizecheck = false;
+                    }
                 }
 
                 break;
@@ -200,22 +212,30 @@ class Game {
                 textFont(font);
                 textSize(40);
                 textAlign(CENTER, CENTER);
-                text("말랑말랑한 것 같은데?", width/2, height - 100);
-                text("손을 오므려보자", width/2, height - 50);
+                if (!this.sizecheck) {
+                    text("말랑말랑한 것 같은데?, 손을 오므려보자", width/2, height - 100);
+                    text("스페이스 바를 눌러 계속", width/2, height - 50);
+                } else {
+                    text("손 모양에 손 크기를 맞춰주세요", width/2, height - 100);
+                    text("손을 오므리거나 화면에서 멀리 하면 공이 작아집니다", width/2, height - 50);
+                }
 
-                console.log(hand.body.circleRadius);
-                if (hand.body.circleRadius < 50) {
-                    this.spacecount += 1;
+                if (this.sizecheck){
+                // console.log(hand.body.circleRadius);
+                    if (hand.body.circleRadius < 50) {
+                        this.spacecount += 1;
+                        this.sizecheck = false;
+                    }
                 }
 
                 break;
 
             case 4:
-                if (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) {
+                if (keyIsDown(68) && keyIsDown(65)) {
                     image(bothActive, 50, 50, 176, 83);
-                } else if (keyIsDown(RIGHT_ARROW) && !keyIsDown(LEFT_ARROW)) {
+                } else if (keyIsDown(68) && !keyIsDown(65)) {
                     image(rightActive, 50, 50, 176, 83);
-                } else if (!keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) {
+                } else if (!keyIsDown(68) && keyIsDown(65)) {
                     image(leftActive, 50, 50, 176, 83);
                 } else {
                     image(bothInActive, 50, 50, 176, 83);
@@ -227,7 +247,7 @@ class Game {
                 hand.ballshow();
 
                 imageMode(CENTER);
-                image(meat_1, 100, 200, 100, 100);
+                image(meat_0, width/2 - 300, 100, 100, 100);
                 imageMode(CORNER);
                 
                 fill(0);
@@ -235,28 +255,58 @@ class Game {
                 textSize(40);
                 textAlign(CENTER, CENTER);
                 text("우와 간식이다 뽀숑", width/2, height - 100);
-                text("간식이 먹고 싶어? 내가 손으로 올려줄게", width/2, height - 50);
+                text("간식이 먹고 싶어? 공 위로 올라가봐", width/2, height - 50);
 
-                if (puppy.body.position.x < 150 && puppy.body.position.y < 200) {
-                    World.remove(world, hand);
+                if ((puppy.body.position.x > width/2 - 350 && puppy.body.position.x < width/2 - 250) && ((puppy.body.position.y < 100) && (puppy.body.position.y > 0))) {
+                    World.clear(world);
+                    elements = [];
+                    puppy;
+                    hand;
                     this.spacecount += 1;
                 }
                 break;
 
-                case 5:
-                    fill(0);
-                    rect(0, 0, width, height);
+            case 5:
+                fill(0);
+                rect(0, 0, width, height);
 
-                    fill(255);
-                    textFont(font);
-                    textSize(50);
-                    textAlign(CENTER, CENTER);
-                    text("앗 기분이 이상해..! 내 몸이 변하고 있는 것 같아", width/2, height/2 + 200);
-                    text(">>>>>", width/2, height/2 + 300);
+                fill(255);
+                textFont(font);
+                textSize(50);
+                textAlign(CENTER, CENTER);
+                text("앗 기분이 이상해..! 내 몸이 변하고 있는 것 같아", width/2, height/2 + 200);
+                // text(">>>>>", width/2, height/2 + 300);
 
-                    if (puppy.body.position.x > width - 100) this.nextstage();
+                // hand.ballshow();
+                // if (puppy.body.position.x > width - 100) this.nextstage();
 
-                    break;
+                imageMode(CENTER);
+                if (this.count < 30) {
+                    image(stage0_1, width/2, height/2, 100, 100);
+                    this.count += 1;
+                } else if (this.count < 60) {
+                    image(stage5, width/2, height/2, 100, 100);
+                    this.count += 1;
+                } else if (this.count < 90) {
+                    image(stage4, width/2, height/2, 100, 100);
+                    this.count += 1;
+                } else if (this.count < 120) {
+                    image(stage3, width/2, height/2, 100, 100);
+                    this.count += 1;
+                } else if (this.count < 150) {
+                    image(stage2_1, width/2, height/2, 100, 100);
+                    this.count += 1;
+                } else if (this.count < 180) {
+                    image(stage1_1, width/2, height/2, 100, 100);
+                    this.count += 1;
+                } else if (this.count < 720) {
+                    this.nextstage();
+                }
+                imageMode(CORNER);
+
+                // console.log(this.count);
+
+                break;
 
                 // case 6:
                 //     this.nextstage();
@@ -279,6 +329,7 @@ class Game {
 
     stage1() {  
         if (this.c1) {
+            World.clear(world);
             dim = {w: 3200, h: 720};
 
             puppy = new Block(world,
@@ -346,11 +397,17 @@ class Game {
       textFont(font);
       textSize(16);
       textAlign(CENTER, CENTER);
-      text("화면 밖으로 나왔어!", 250, 300);
-      text("금방 만나러 갈게", 250, 320);
+      text("내 모습이 왜 이러지?", 250, 350);
+      text("원래대로 돌아가게 도와줘!", 250, 370);
 
-      textSize(20);
-      text("여긴 어떻게 지나가지..", 545, 480);
+      if (this.count < 3) {
+        textSize(20);
+        text("여긴 어떻게 지나가지..", 545, 480);
+      } else {
+        textSize(20);
+        text("날 위해 길을 만들어줘", 545, 480);
+      }
+      console.log(this.count);
 
       puppy.move();
       hand.ballshow();
@@ -361,6 +418,7 @@ class Game {
 
       if (this.gameover()) {
           this.resetstage1();
+          this.count += 1;
       }
 
       if (puppy.body.position.x > 3000 && puppy.body.position.y > 300) {
@@ -440,6 +498,16 @@ class Game {
 
       image(stage2backgroundimage, 0, 0, 3200, 720);
 
+      fill(0);
+      textFont(font);
+      textSize(16);
+      textAlign(CENTER, CENTER);
+      text("고기를 먹으니까 조금씩 내 몸으로 돌아오는 것 같아!", 250, 350);
+      text("너랑 공놀이를 하니까 즐거워!", 1450, 350);
+      text("너를 만나러 가고 싶어!", 1450, 370);
+      text("두 가지 길이 있네!", 2050, 350);
+      text("둘 중 하나는 너에게 갈 수 있는 길인 것 같아", 2050, 370);
+
       puppy.move();
       hand.ballshow();
       elements.forEach(element => element.draw());
@@ -506,7 +574,17 @@ class Game {
         // scrollEndless(puppy.body.position);
 
         imageMode(CENTER);
-        image(stage3backgroundimage, 0, 0, 3000, 3000);
+        image(stage3backgroundimage, 0, 0, 2560, 1440);
+
+        image(AD_lock, -600, -200, 176, 82);
+        image(handGuide3, -600, -100, 100, 100);
+
+        fill(0);
+        textFont(font);
+        textSize(16);
+        textAlign(CENTER, CENTER);
+        text("앗! 움직일 수가 없어", -350, 80);
+        text("어떻게 가야 하지?", -350, 100);
 
         elements.forEach(element => element.draw());
         puppy.draw();
@@ -625,6 +703,13 @@ class Game {
 
         image(stage4image, 100, 250, 50, 50);
 
+        fill(0);
+        textFont(font);
+        textSize(16);
+        textAlign(CENTER, CENTER);
+        text("벌써 64동까지 왔어!", -200, 80);
+        text("길 찾는 걸 도와줘", -200, 100);
+
         elements.forEach(element => element.draw());
 
         engine.world.gravity.x = cos(-angle + 0.5*PI);
@@ -711,7 +796,7 @@ class Game {
 
         this.c5 = false;
 
-        calculateAngle();
+        // calculateAngle();
 
         push();
         translate(width/2, height/2);
@@ -733,6 +818,18 @@ class Game {
         image(stage5image2, -270, -270, 50, 50);
         image(stage5image2, -270, -20, 50, 50);
 
+        fill(0);
+        textFont(font);
+        textSize(16);
+        textAlign(CENTER, CENTER);
+        if (this.count < 3) {
+            text("3층에 도착했어! 너가 있는 교실은 어디야?", 110, 130);
+            text("저 빨간 소화전은 조금 위험해보이는데?", 110, 150);
+        } else {
+            text("얼른 너를 만나고 싶어", 110, 130);
+            text("=키를 누르면 지금 바로 달려갈게", 110, 150);
+        }
+
         elements.forEach(element => element.draw());
 
         engine.world.gravity.x = cos(-angle + 0.5*PI);
@@ -740,10 +837,12 @@ class Game {
 
         if ((puppy.body.position.x > -290 && puppy.body.position.x < -230) && (puppy.body.position.y > -290 && puppy.body.position.y < -230)) {
             this.resetstage5();
+            this.count += 1;
         }
 
         if ((puppy.body.position.x > -290 && puppy.body.position.x < -230) && (puppy.body.position.y > -30 && puppy.body.position.y < 10)) {
             this.resetstage5();
+            this.count += 1;
         }
 
 
@@ -756,12 +855,49 @@ class Game {
 
     stage6() {
         if (this.c6) {
-            
+            hand = new Hand(-10, -10, 5);
         }
 
         this.c6 = false;
 
-        imageMode(CENTER);
-        image(cam, width/2, height/2, 640, 480);
+        if (this.count == 0) {
+            fill(0);
+            rect(0, 0, width, height);
+            image(stage0_1, width/2 - 400, height/2 + 100, 200, 200);
+
+            fill(255);
+            textFont(font);
+            textSize(50);
+            textAlign(CENTER, CENTER);
+            text("드디어 만나게 돼서 기뻐", width/2, height/2 - 120);
+            text("나랑 같이 사진 찍지 않을래?", width/2, height/2 - 60);
+            textSize(32);
+            text("스페이스 바를 눌러 계속", width/2, height/2);
+        } else {
+            if (detections.length > 0) hand.inflate();
+            else hand.update(-10, -10, 5);
+
+            imageMode(CENTER);
+            push();
+            translate(width, 0);
+            scale(-1, 1);
+            image(cam, width/2, height/2 - 50, 640, 480);
+            pop();
+            fill(0);
+            rect(0, 0, width/2 - 240, height);
+            rect(width/2 + 240, 0, width/2 - 240, height);
+            rect(0, 0, width, height/2 - 320);
+            rect(0, height/2 + 320, width, height/2 - 320);
+            image(frame, width/2, height/2, 480, 640);
+
+            hand.puppyshow();
+
+            fill(255);
+            textFont(font);
+            textSize(50);
+            textAlign(CENTER, CENTER);
+            text("R키를 눌러", width - 200, height - 150);
+            text("재시작", width - 200, height - 100);
+        }
     }
 }
