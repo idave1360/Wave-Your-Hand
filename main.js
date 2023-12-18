@@ -128,7 +128,7 @@ function preload() {
 
     stage5 = loadImage("assets/character/stage5/stage5.png");
     stage5image = loadImage("assets/UI/stage5_goal.png");
-    stage5image2 = loadImage("assets/UI/stage5_obstacle.PNG");
+    stage5image2 = loadImage("assets/UI/stage5_obstacle.png");
 
     frame = loadImage("assets/UI/frame.PNG");
 
