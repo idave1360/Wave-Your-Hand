@@ -140,7 +140,7 @@ function preload() {
 }
 
 function setup() {
-  let canvas = createCanvas(windowWidth, windowHeight);
+  let canvas = createCanvas(windowWidth, 720);
   canvas.parent('thecanvas');
   
   canvasElem = document.getElementById('thecanvas');
