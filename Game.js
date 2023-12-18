@@ -75,7 +75,7 @@ class Game {
             );
 
             elements.push(new BlockCore(world,
-                {x: width/2, y: 700, w: width, h: 300, color: (0, 0, 0, 0)},
+                {x: width/2, y: height - 20, w: width, h: 300, color: (0, 0, 0, 0)},
                {isStatic: true, label: "ground", density: 0.004, restitution: 0.5, friction: 0.1, frictionAir: 0.0})
             );
 
@@ -129,14 +129,14 @@ class Game {
 
                 if (!this.leftsnack) {
                     imageMode(CENTER);
-                    image(meat_3, 100, 500, 100, 100);
+                    image(meat_3, 100, height - 200, 100, 100);
                     imageMode(CORNER);
 
                 }
 
                 if (!this.rightsnack) {
                     imageMode(CENTER);
-                    image(meat_3, width - 100, 500, 100, 100);
+                    image(meat_3, width - 100, height - 200, 100, 100);
                     imageMode(CORNER);
                 }
 
