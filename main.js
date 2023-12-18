@@ -24,8 +24,8 @@ let handpose;
 let detections = [];
 
 // qrcode.js
-let qrcode;
-let supbase64Imagee;
+// let qrcode;
+// let supbase64Imagee;
 
 // p5.js
 let canvasElem;
@@ -167,10 +167,10 @@ function setup() {
   
   gamecontroller = new Game();
 
-  supabase = createClient(
-    "https://khwcdxhwfatpeltdqiqe.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtod2NkeGh3ZmF0cGVsdGRxaXFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI5MjE4ODksImV4cCI6MjAxODQ5Nzg4OX0.rJist0ixf7xPSuyL3NxTeDCDGh2H77-Npw9JkS-jHcg"
-  );
+  // supabase = createClient(
+  //   "https://khwcdxhwfatpeltdqiqe.supabase.co",
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtod2NkeGh3ZmF0cGVsdGRxaXFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI5MjE4ODksImV4cCI6MjAxODQ5Nzg4OX0.rJist0ixf7xPSuyL3NxTeDCDGh2H77-Npw9JkS-jHcg"
+  // );
 
   // qrcode = createDiv()
   // qrcode.id('qrcode')
