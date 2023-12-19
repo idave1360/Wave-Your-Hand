@@ -62,7 +62,7 @@ class Game {
     stage0() {
         if (this.c0) {
             dim = {w: 1920, h: 1080};
-            imageMode(CENTER);
+            // imageMode(CENTER);
 
             puppy = new Block(world,
                 {x: width/2, y: height/2, w: 50, h: 50, image: loadImage("assets/character/stage0/stage0_1.png")},
