@@ -253,10 +253,11 @@ function keyPressed() {
           gamecontroller.resetstage5();
           break;
 
-        case 6:
-          World.clear(world);
-          elements = [];
-          gamecontroller = new Game();
+        // case 6:
+        //   World.clear(world);
+        //   elements = [];
+        //   gamecontroller = new Game();
+        //   break;
       }
     }
 
