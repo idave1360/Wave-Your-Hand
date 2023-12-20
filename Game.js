@@ -61,7 +61,7 @@ class Game {
     
     stage0() {
         if (this.c0) {
-            dim = {w: 1920, h: 1080};
+            dim = {w: 1920, h: height};
             // imageMode(CENTER);
 
             puppy = new Block(world,
@@ -331,7 +331,7 @@ class Game {
     stage1() {  
         if (this.c1) {
             World.clear(world);
-            dim = {w: 3200, h: 720};
+            dim = {w: 3200, h: height};
 
             puppy = new Block(world,
               {x: 150, y: 450, w: 50, h: 50, image: loadImage("assets/character/stage1/stage1_1.PNG")},
@@ -539,7 +539,7 @@ class Game {
     
     stage3() {
         if (this.c3) {
-            dim = {w: 1280, h: 720};
+            dim = {w: 1280, h: height};
 
             puppy = new Block(world,
                 {x: -640, y: 0, w: 50, h: 50, image: loadImage("assets/character/stage3/stage3.png")},
@@ -607,7 +607,7 @@ class Game {
 
     stage4() {
         if (this.c4) {
-            dim = {w: 720, h: 720};
+            dim = {w: 720, h: height};
 
             puppy = new Block(world,
                 {x: -250, y: 0, w: 100, h: 70, image: loadImage("assets/character/stage4/stage4.png")},
@@ -797,7 +797,7 @@ class Game {
 
         this.c5 = false;
 
-        // calculateAngle();
+        calculateAngle();
 
         push();
         translate(width/2, height/2);
@@ -893,12 +893,12 @@ class Game {
 
             hand.puppyshow();
 
-            fill(255);
-            textFont(font);
-            textSize(50);
-            textAlign(CENTER, CENTER);
-            text("R키를 눌러", width - 200, height - 150);
-            text("재시작", width - 200, height - 100);
+            // fill(255);
+            // textFont(font);
+            // textSize(50);
+            // textAlign(CENTER, CENTER);
+            // text("R키를 눌러", width - 200, height - 150);
+            // text("재시작", width - 200, height - 100);
         }
     }
 }
